@@ -13,22 +13,18 @@ const appsController = {
 		try {
 
 			const insertQuery = 'SELECT * FROM applications';
-
 			const applications = await pool.query(insertQuery);
-			console.log('Returned from getApplications: ', applications);
 
 			res.locals.applications = applications.rows;
 
 			return next();
 
 		} catch (err) {
-
 			return next({
 				log: `error in appsController.getApplications : ${err}`,
 				status: 500,
 				message: { err: 'An error has occured while collecting applications. Check server logs for more details.'}
 			})
-
 		}
 	},
 
@@ -42,10 +38,8 @@ const appsController = {
 
 			// change this once frontend call is confirmed
 			const { jobTitle, company, etc } = req.body;
-
 			// change this once frontend call is confirmed
 			const insertQuery = `INSERT INTO applications (jobTitle, company, etc) VALUES ($1, $2, $3) RETURNING *`;
-
 			// change this once frontend call is confirmed
 			const insertValues = [jobTitle, company, etc];
 
@@ -57,13 +51,11 @@ const appsController = {
 			return next();
 
 		} catch (err) {
-
 			return next({
 				log: `error in appsController.createApplications : ${err}`,
 				status: 500,
 				message: { err: 'An error has occured while creating applications. Check server logs for more details.'}
 			})
-
 		}
 	},
 
@@ -77,7 +69,6 @@ const appsController = {
 
 			// change this once frontend call is confirmed
 			const { _id } = req.body;
-
 			// change this once frontend call is confirmed
 			const insertQuery = `DELETE FROM applications WHERE _id = ${_id} RETURNING *`;
 
@@ -87,13 +78,11 @@ const appsController = {
 			return next();
 
 		} catch (err) {
-
 			return next({
 				log: `error in appsController.deleteApplications : ${err}`,
 				status: 500,
 				message: { err: 'An error has occured while deleting this application. Check server logs for more details.'}
 			})
-
 		}
 	},
 };

@@ -9,13 +9,6 @@ const pool = new Pool({
   connectionString: process.env.VITE_DB_URI,
 });
 
-// module.exports = {
-//   query: (text, params, callback) => {
-//     console.log('executed query', text);
-//     return pool.query(text, params, callback);
-//   },
-// };
-
 export const query = (
   text: string,
   params: Array<string | number | boolean>,
