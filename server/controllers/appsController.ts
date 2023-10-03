@@ -18,7 +18,7 @@ const appsController = {
 		res: Response,
 		next: NextFunction
 	): Promise<void> => {
-
+		
 		try {
 
 			const insertQuery = 'SELECT * FROM applications';
@@ -74,7 +74,7 @@ const appsController = {
 			} = req.body;
 
 			const insertQuery = `
-				INSERT INTO applications 
+				INSERT INTO "applications" 
 					(
 						company,
 						companyURL,
@@ -146,14 +146,20 @@ const appsController = {
 
 		try {
 
-			// change this once frontend call is confirmed
-			const { _id } = req.body;
-			// change this once frontend call is confirmed
-			const insertQuery = `DELETE FROM applications WHERE _id = ${_id} RETURNING *`;
+			const idToDelete = req.body.id;
+			console.log('idToDelete: ', idToDelete)
+			const insertQuery = `DELETE FROM applications WHERE id = $1 RETURNING *`;
 
-			const deletedApplication = pool.query(insertQuery);
-			console.log('Returned from deleteApplication: ', deletedApplication);
+			const deletedApplication = await pool.query(insertQuery, [idToDelete]);
+			// console.log('Returned from deleteApplication: ', deletedApplication);
 
+			if (deletedApplication.rows.length === 0) {
+				return next({
+					log: 'error occured while trying to delete an application - application may not exist',
+					status: 304, // not modified
+					message: { err: 'The requested application to delete could not be found'}
+				})
+			}
 			return next();
 
 		} catch (err) {
@@ -161,6 +167,92 @@ const appsController = {
 				log: `error in appsController.deleteApplications : ${err}`,
 				status: 500,
 				message: { err: 'An error has occured while deleting this application. Check server logs for more details.'}
+			})
+		}
+	},
+
+	/**
+	 * ************************************
+	 *
+	 * @module  updateApplication
+	 * @authors Preston Coldwell, Ryan Smithey, Geoff Sun, Micah Nelson, Elias Toussaint
+	 * @description updates an application in the database
+	 * 
+	 * ************************************
+	 */
+	updateApplication: async (
+		req: Request,
+		res: Response,
+		next: NextFunction
+	): Promise<void> => {
+
+		try {
+
+			const idToUpdate = req.body.id;
+			const properties = req.body.properties;
+
+			console.log('idToUpdate: ', idToUpdate)
+			const insertQuery = `
+				UPDATE applications
+				SET(
+					company,
+					companyURL,
+					companyContact,
+					jobTitle,
+					jobLocation,
+					jobDescription,
+					jobStatus,
+					interviewQuestions,
+					applicationStatus,
+					jobURL,
+					schedule,
+					remote,
+					dateApplied,
+					interviewDate,
+					salary,
+					notes
+				) = (
+					$2, 
+					$3, 
+					$4, 
+					$5, 
+					$6, 
+					$7, 
+					$8, 
+					$9, 
+					$10, 
+					$11, 
+					$12, 
+					$13, 
+					$14, 
+					$15, 
+					$16,
+					$17
+				)
+				WHERE id = $1 
+				RETURNING *
+			`;
+
+			const updateApplication = await pool.query(insertQuery, [idToUpdate, ...properties]);
+			// console.log('Returned from updateApplication: ', updateApplication);
+
+			if (updateApplication.rows.length === 0) {
+				return next({
+					log: 'error occured while trying to update an application - application may not exist',
+					status: 304, // not modified
+					message: { err: 'The requested application to update could not be found'}
+				})
+			}
+
+			res.locals.updatedApplication = updateApplication;
+
+			return next();
+
+		} catch (err) {
+			return next({
+				log: `error in appsController.updateApplication : ${err}`,
+				status: 500,
+				message: { err: 'An error has occured while updating this application. Check server logs for more details.'}
 			})
 		}
 	},
