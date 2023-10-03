@@ -70,7 +70,6 @@ const CreateJob: React.FC = () => {
         salary,
         notes,
       });
-      console.log(response);
       // not sure how to get rid of this at the moment with types...
       if (response.status === 200) {
         toDashboard();
