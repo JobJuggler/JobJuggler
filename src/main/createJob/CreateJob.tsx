@@ -1,32 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import InputField from './InputField';
 
 const CreateJob: React.FC = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-
-  // TypeScript typing
-  interface CreateJobResponse {
-    company: String;
-    companyURL: String;
-    companyContact: String;
-    jobTitle: String;
-    jobLocation: String;
-    jobDescription: String;
-    jobStatus: String;
-    interviewQuestions: String;
-    applicationStatus: String;
-    jobURL: String;
-    schedule: String;
-    remote: String;
-    dateApplied: Date;
-    interviewDate: Date;
-    salary: Number;
-    notes: String;
-  }
-
+  
   // input field states
   const [company, setCompany] = useState('');
   const [companyURL, setCompanyURL] = useState('');
@@ -51,8 +30,7 @@ const CreateJob: React.FC = () => {
 
   const onCreateClicked = async () => {
     try {
-      console.log('onCreateClicked initiated');
-      const response = await axios.post<CreateJobResponse>('/api/apps', {
+      const response = await axios.post<undefined>('/api/apps', {
         company,
         companyURL,
         companyContact,
@@ -81,112 +59,34 @@ const CreateJob: React.FC = () => {
     }
   };
 
-  return (
-    <div className='flex flex-col p-5'>
-      <h1 className='text-2xl pl-16'>Create a new application!</h1>
 
-      <input
-        type='text'
-        placeholder='Company Name'
-        onChange={(e) => setCompany(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Company URL'
-        onChange={(e) => setCompanyURL(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Company Contact'
-        onChange={(e) => setCompanyContact(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Job Title'
-        onChange={(e) => setJobTitle(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Location'
-        onChange={(e) => setJobLocation(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Job Description'
-        onChange={(e) => setJobDescription(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Job Status'
-        onChange={(e) => setJobStatus(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Interview Questions'
-        onChange={(e) => setInterviewQuestions(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Application Status'
-        onChange={(e) => setApplicationStatus(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Job Listing URL'
-        onChange={(e) => setJobURL(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Full-Time / Part-Time'
-        onChange={(e) => setSchedule(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='On-Site / Remote'
-        onChange={(e) => setRemote(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Date Applied (MM-DD-YYYY)'
-        onChange={(e) => setDateApplied(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Interview Date (MM-DD-YYYY)'
-        onChange={(e) => setInterviewDate(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Salary'
-        onChange={(e) => setSalary(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
-      <input
-        type='text'
-        placeholder='Notes'
-        onChange={(e) => setNotes(e.target.value)}
-        className='w-96 p-1 m-0.5 border border-black'
-      />
+  return (
+    <div className='flex flex-col p-4'>
+      <h1 className='text-2xl'>Create a new application!</h1>
+
+      <InputField placeholder='Company Name' setVariable={setCompany}/>
+      <InputField placeholder='Company URL' setVariable={setCompanyURL}/>
+      <InputField placeholder='Company Contact' setVariable={setCompanyContact}/>
+      <InputField placeholder='Job Title' setVariable={setJobTitle}/>
+      <InputField placeholder='Location' setVariable={setJobLocation}/>
+      <InputField placeholder='Job Description' setVariable={setJobDescription}/>
+      <InputField placeholder='Job Status' setVariable={setJobStatus}/>
+      <InputField placeholder='Interview Questions' setVariable={setInterviewQuestions}/>
+      <InputField placeholder='Application Status' setVariable={setApplicationStatus}/>
+      <InputField placeholder='Job Listing URL' setVariable={setJobURL}/>
+      <InputField placeholder='Full-Time / Part-Time' setVariable={setSchedule}/>
+      <InputField placeholder='On-Site / Remote' setVariable={setRemote}/>
+      <InputField placeholder='Date Applied (MM-DD-YYYY)' setVariable={setDateApplied}/>
+      <InputField placeholder='Interview Date (MM-DD-YYYY)' setVariable={setInterviewDate}/>
+      <InputField placeholder='Salary' setVariable={setSalary}/>
+      <InputField placeholder='Notes' setVariable={setNotes}/>
+      
 
       <button
         onClick={() => {
           onCreateClicked();
         }}
-        className='border border-black w-96'
+        className='p-1 m-0.5 border border-black bg-secondary rounded-md'
       >
         Create Application
       </button>

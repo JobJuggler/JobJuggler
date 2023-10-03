@@ -1,6 +1,7 @@
 #root {
   width: 100vw;
   height: 100vh;
+  background-color: #0f172a;
 }
 
 /* tailwind config */
@@ -9,3 +10,6 @@
 @tailwind utilities;
 
 /* other styles */
+* {
+  color: #e2e8f0;
+}
