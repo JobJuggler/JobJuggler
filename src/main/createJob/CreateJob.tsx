@@ -2,30 +2,15 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { Job } from '../../../global/types'
+
+type CreateJobResponse = {
+  job: Job;
+};
 
 const CreateJob: React.FC = () => {
   const navigate = useNavigate();
   // const dispatch = useDispatch();
-
-  // TypeScript typing
-  interface CreateJobResponse {
-    company: String;
-    companyURL: String;
-    companyContact: String;
-    jobTitle: String;
-    jobLocation: String;
-    jobDescription: String;
-    jobStatus: String;
-    interviewQuestions: String;
-    applicationStatus: String;
-    jobURL: String;
-    schedule: String;
-    remote: String;
-    dateApplied: Date;
-    interviewDate: Date;
-    salary: Number;
-    notes: String;
-  }
 
   // input field states
   const [company, setCompany] = useState('');
@@ -51,25 +36,29 @@ const CreateJob: React.FC = () => {
 
   const onCreateClicked = async () => {
     try {
-      console.log('onCreateClicked initiated');
-      const response = await axios.post<CreateJobResponse>('/api/apps', {
-        company,
-        companyURL,
-        companyContact,
-        jobTitle,
-        jobLocation,
-        jobDescription,
-        jobStatus,
-        interviewQuestions,
-        applicationStatus,
-        jobURL,
-        schedule,
-        remote,
-        dateApplied,
-        interviewDate,
-        salary,
-        notes,
-      });
+      console.log('onCreateClicked initiated')
+      const response = await axios.post<CreateJobResponse>(
+        '/api/apps',
+        {
+          company,
+					companyURL,
+					companyContact,
+					jobTitle,
+					jobLocation,
+					jobDescription,
+					jobStatus,
+					interviewQuestions,
+					applicationStatus,
+					jobURL,
+					schedule,
+					remote,
+					dateApplied,
+					interviewDate,
+					salary,
+					notes
+        }
+      )
+
       // not sure how to get rid of this at the moment with types...
       if (response.status === 200) {
         toDashboard();
