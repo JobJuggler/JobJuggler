@@ -8,7 +8,6 @@ import NavBar from './main/navBar/NavBar.tsx';
 function App() {
   return (
     <BrowserRouter>
-      <NavBar/>
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/createjob' element={<CreateJob />} />

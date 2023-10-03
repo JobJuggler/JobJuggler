@@ -8,13 +8,8 @@ interface authInfo {
   password: string;
 }
 
-interface LoginProps {
-  onSignIn: (username: string, password: string) => void;
-  onSignUp: () => void;
-  onForgotPassword: () => void;
-}
 
-const Login: React.FC<LoginProps> = ({ onSignIn, onSignUp, onForgotPassword }) => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -66,8 +61,8 @@ const Login: React.FC<LoginProps> = ({ onSignIn, onSignUp, onForgotPassword }) =
         </div>
         <button onClick={handleSignIn} className="px-4 py-2 rounded w-full mb-2">Sign In</button>
         <div className="flex justify-between">
-          <button onClick={onSignUp} className="px-4 py-2 rounded mr-2">Sign Up</button>
-          <button onClick={onForgotPassword} className="px-4 py-2 rounded">Forgot Password</button>
+          <button  className="px-4 py-2 rounded mr-2">Sign Up</button>
+          <button  className="px-4 py-2 rounded">Forgot Password</button>
         </div>
       </div>
     </div>
