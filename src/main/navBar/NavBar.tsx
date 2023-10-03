@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import DropDown from './dropDown';
+import DropDown from './DropDown.tsx';
 
 const NavBar = ({}) => {
 
