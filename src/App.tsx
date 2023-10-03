@@ -3,13 +3,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import Dashboard from './main/dashboard/Dashboard';
 import CreateJob from './main/createJob/CreateJob';
+import Login from './main/login/Login';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Dashboard />} />
+        <Route path='/' element={<Login />} />
         <Route path='/createjob' element={<CreateJob />} />
+        <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );

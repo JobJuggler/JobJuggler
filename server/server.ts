@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import appsRouter from './routes/appsRouter';
+import authRouter from './routes/authRouter';
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 
 // ROUTING
 app.use('/api/apps', appsRouter);
+app.use('/api/auth', authRouter);
 
 // 404 HANDLER
 app.use((_req: Request, res: Response) => res.status(404).send('This is not the page you\'re looking for...'));

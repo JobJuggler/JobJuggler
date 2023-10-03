@@ -45,7 +45,7 @@ const requestBody: RequestBody = {
       "notes": "none"
 }
 
-
+// GETTING APPLICATIONS
 test('/api/apps responds to GET request with 200 status', () => {
     return request(server)
       .get('/api/apps')
@@ -53,15 +53,21 @@ test('/api/apps responds to GET request with 200 status', () => {
   });
 
 
+// CREATING APPLICATIONS 
 test('/api/apps responds to POST request with 500 status wwhen not given the required information', () => {
   return request(server)
     .post('/api/apps')
     .expect(500)
-})
+});
 
 test('/api/apps responds to POST request with 200 status when given the required information', () => {
   return request(server)
     .post('/api/apps')
     .send(requestBody)
     .expect(200)
-})
+});
+
+// DELETING APPLICATIONS
+
+
+// UPDATING APPLICATIONS
