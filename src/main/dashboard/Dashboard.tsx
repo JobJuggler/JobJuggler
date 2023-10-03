@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { loadJobs } from '../../state/reducers/jobSlice';
-import type { Job } from '../../state/reducers/jobSlice';
+import type { Job } from  '../../../global/types';
 import { useAppDispatch, useAppSelector } from '../../state/hooks/hooks';
 import Card from './Card';
 
