@@ -19,7 +19,6 @@ appsRouter.get(
   '/',
   appsController.getApplications,
   (_req: Request, res: Response) => {
-    console.log('get request hit');
     res.status(200).send(res.locals.applications);
   },
 );
@@ -29,14 +28,13 @@ appsRouter.post(
   '/',
   appsController.createApplication,
   (_req: Request, res: Response) => {
-    console.log('post request hit');
     res.status(200).send(res.locals.newApplication);
   },
 );
 
 // DELETE APPLICATION FROM DATABASE
 appsRouter.delete(
-  '/:id',
+  '/',
   appsController.deleteApplication,
   (_req: Request, res: Response) => {
     console.log('delete request hit');
@@ -45,13 +43,13 @@ appsRouter.delete(
 );
 
 // UPDATE APPLICATION IN DATABASE
-// appsRouter.put(
-//   '/',
-//   appsController.updateApplication,
-//   (_req: Request, res: Response) => {
-//     console.log('update request hit');
-//     res.status(200).send('Updated Application');
-//   },
-// );
+appsRouter.put(
+  '/',
+  appsController.updateApplication,
+  (_req: Request, res: Response) => {
+    console.log('update request hit');
+    res.status(200).send(res.locals.updatedApplication);
+  },
+);
 
 export default appsRouter;
