@@ -13,7 +13,7 @@ const NavBar = ({}) => {
           <img 
 						onClick={() => navigate('/')} 
             src="/NavLogo.png" 
-            className="h-10 hover:cursor-pointer md:h-12" 
+            className="h-10 hover:cursor-pointer" 
             alt="Logo" 
 					/>
         </div>
