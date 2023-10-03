@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host & nodemon server/server.js",
+    "dev": "vite --host & nodemon server/server.ts",
     "build": "tsc && vite build",
     "runTS": "nodemon server/server.ts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
