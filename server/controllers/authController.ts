@@ -13,30 +13,30 @@ const authController = {
 	 * 
 	 * ************************************
 	 */
-	authenticateUser: async (
-		_req: Request,
-		res: Response,
-		next: NextFunction
-	): Promise<void> => {
+	// authenticateUser: async (
+	// 	_req: Request,
+	// 	res: Response,
+	// 	next: NextFunction
+	// ): Promise<void> => {
 		
-		try {
-      // Destructure req body
-      // const { username, password } = _req.body; 
-			// const insertQuery = 'SELECT * FROM applications';
-			const applications = await pool.query(insertQuery);
+	// 	try {
+  //     // Destructure req body
+  //     // const { username, password } = _req.body; 
+	// 		// const insertQuery = 'SELECT * FROM applications';
+	// 		const applications = await pool.query(insertQuery);
 
-			res.locals.applications = applications.rows;
+	// 		res.locals.applications = applications.rows;
 
-			return next();
+	// 		return next();
 
-		} catch (err) {
-			return next({
-				log: `error in appsController.getApplications : ${err}`,
-				status: 500,
-				message: { err: 'An error has occured while collecting your application. Check server logs for more details.'}
-			})
-		}
-	},
+	// 	} catch (err) {
+	// 		return next({
+	// 			log: `error in appsController.getApplications : ${err}`,
+	// 			status: 500,
+	// 			message: { err: 'An error has occured while collecting your application. Check server logs for more details.'}
+	// 		})
+	// 	}
+	// },
 
 /**
 	 * ************************************
