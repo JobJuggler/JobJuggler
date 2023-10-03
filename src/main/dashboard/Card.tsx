@@ -10,7 +10,6 @@ type CardParams = {
 const Card: React.FC<CardParams> = ({ job }) => {
   const arr: React.JSX.Element[] = [];
 
-  console.log(job);
   arr.push(<h1>{job.company}</h1>);
   arr.push(<h1>{job.jobtitle}</h1>);
   arr.push(<h1>{job.joblocation}</h1>);
