@@ -10,7 +10,7 @@
 
 import express, { Router, Request, Response } from 'express';
 
-import appsController from '../controllers/appsController.ts';
+import appsController from '../controllers/appsController';
 
 const appsRouter: Router = express.Router();
 
