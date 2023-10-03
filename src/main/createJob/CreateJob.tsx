@@ -53,7 +53,7 @@ const CreateJob: React.FC = () => {
   const onCreateClicked = async () => {
     try {
       console.log('onCreateClicked initiated')
-      const response = axios.post<CreateJobResponse>(
+      const response = await axios.post<CreateJobResponse>(
         '/api/apps',
         {
           company,
@@ -74,9 +74,9 @@ const CreateJob: React.FC = () => {
 					notes
         }
       )
-
+        console.log('Response: ', response);
       // not sure how to get rid of this at the moment with types...
-      if (response.ok) {
+      if (response.status === 200) {
         toDashboard();
       } else {
         console.log('Response: ', response);
