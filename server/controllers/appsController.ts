@@ -146,14 +146,19 @@ const appsController = {
 
 		try {
 
-			// change this once frontend call is confirmed
-			const { _id } = req.body;
-			// change this once frontend call is confirmed
-			const insertQuery = `DELETE FROM applications WHERE _id = ${_id} RETURNING *`;
+			const idToDelete = req.params.id;
+			const insertQuery = `DELETE FROM applications WHERE _id = $1 RETURNING *`;
 
-			const deletedApplication = pool.query(insertQuery);
-			console.log('Returned from deleteApplication: ', deletedApplication);
+			const deletedApplication = await pool.query(insertQuery, [idToDelete]);
+			// console.log('Returned from deleteApplication: ', deletedApplication);
 
+			if (deletedApplication.rows.length === 0) {
+				return next({
+					log: 'error occured while trying to delete an application - application may not exist',
+					status: 304, // not modified
+					message: { err: 'The requested application to delete could not be found'}
+				})
+			}
 			return next();
 
 		} catch (err) {
