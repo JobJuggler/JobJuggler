@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { pool } from "../models/appsModel.ts"
+import { pool } from "../models/appsModel"
 // import db from '../models/appsModel.ts';
 
 const appsController = {

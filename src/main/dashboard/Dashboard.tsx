@@ -1,28 +1,38 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { loadJobs } from '../../state/reducers/jobSlice';
+import type { Job } from '../../state/reducers/jobSlice';
+import { useAppDispatch, useAppSelector } from '../../state/hooks/hooks';
+import Card from './Card';
 
 type params = {};
 
 const loadJobsReact = async (dispatch: any) => {
-  const jobs: any = await fetch('/api/apps');
-  const jobsJSON = await jobs.json();
+  const jobs: Response = await fetch('/api/apps');
+  const jobsJSON: Job[] = await jobs.json();
 
   dispatch(loadJobs(jobsJSON));
 };
 
 const Dashboard: React.FC<params> = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     loadJobsReact(dispatch);
   }, []);
 
-  const jobList = useSelector((state: any) => state.jobSlice.jobs);
+  const jobList = useAppSelector((state) => state.jobs);
+  let newCard = <></>;
 
-  console.log(jobList);
+  if (jobList[0]) {
+    newCard = <Card job={jobList[1]}></Card>;
+  }
 
-  return <div></div>;
+  return (
+    <div>
+      <h1>Title Page</h1>
+      {newCard}
+    </div>
+  );
 };
 
 export default Dashboard;
