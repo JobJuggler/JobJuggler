@@ -1,6 +1,8 @@
 import React from 'react';
 
-const Dashboard: React.FC = () => {
+type params = {};
+
+const Dashboard: React.FC<params> = () => {
   return (
     <div>
       <h1>This is the the create page</h1>
