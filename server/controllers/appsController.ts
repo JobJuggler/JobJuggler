@@ -4,6 +4,15 @@ import { pool } from "../models/appsModel.ts"
 
 const appsController = {
 
+	/**
+	 * ************************************
+	 *
+	 * @module  getApplications
+	 * @authors Preston Coldwell, Ryan Smithey, Geoff Sun, Micah Nelson, Elias Toussaint
+	 * @description gets all applications from database - data returned on res.locals.applications
+	 * 
+	 * ************************************
+	 */
 	getApplications: async (
 		_req: Request,
 		res: Response,
@@ -23,11 +32,20 @@ const appsController = {
 			return next({
 				log: `error in appsController.getApplications : ${err}`,
 				status: 500,
-				message: { err: 'An error has occured while collecting applications. Check server logs for more details.'}
+				message: { err: 'An error has occured while collecting your application. Check server logs for more details.'}
 			})
 		}
 	},
 
+	/**
+	 * ************************************
+	 *
+	 * @module  createApplications
+	 * @authors Preston Coldwell, Ryan Smithey, Geoff Sun, Micah Nelson, Elias Toussaint
+	 * @description creates an application in the database - data returned on res.locals.newApplication
+	 * 
+	 * ************************************
+	 */
 	createApplication: async (
 		req: Request,
 		res: Response,
@@ -36,17 +54,69 @@ const appsController = {
 
 		try {
 
-			// change this once frontend call is confirmed
-			const { jobTitle, company, etc } = req.body;
-			// change this once frontend call is confirmed
-			const insertQuery = `INSERT INTO applications (jobTitle, company, etc) VALUES ($1, $2, $3) RETURNING *`;
-			// change this once frontend call is confirmed
-			const insertValues = [jobTitle, company, etc];
+			const { 
+				company,
+				companyURL,
+				companyContact,
+				jobTitle,
+				jobLocation,
+				jobDescription,
+				jobStatus,
+				interviewQuestions,
+				applicationStatus,
+				jobURL,
+				schedule,
+				remote,
+				dateApplied,
+				interviewDate,
+				salary,
+				notes
+			} = req.body;
 
-			const newApplication = pool.query(insertQuery, insertValues);
-			console.log('Returned from createApplication: ', newApplication);
+			const insertQuery = `
+				INSERT INTO applications 
+					(
+						company,
+						companyURL,
+						companyContact,
+						jobTitle,
+						jobLocation,
+						jobDescription,
+						jobStatus,
+						interviewQuestions,
+						applicationStatus,
+						jobURL,
+						schedule,
+						remote,
+						dateApplied,
+						interviewDate,
+						salary,
+						notes
+					) 
+				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *`;
 
-			res.locals.newApplication = newApplication;
+			const insertValues = [
+				company,
+				companyURL,
+				companyContact,
+				jobTitle,
+				jobLocation,
+				jobDescription,
+				jobStatus,
+				interviewQuestions,
+				applicationStatus,
+				jobURL,
+				schedule,
+				remote,
+				dateApplied,
+				interviewDate,
+				salary,
+				notes
+			];
+
+			const newApplication = await pool.query(insertQuery, insertValues);
+
+			res.locals.newApplication = newApplication.rows;
 
 			return next();
 
@@ -59,6 +129,15 @@ const appsController = {
 		}
 	},
 
+	/**
+	 * ************************************
+	 *
+	 * @module  deleteApplication
+	 * @authors Preston Coldwell, Ryan Smithey, Geoff Sun, Micah Nelson, Elias Toussaint
+	 * @description deletes an application from the database - nothing returned
+	 * 
+	 * ************************************
+	 */
 	deleteApplication: async (
 		req: Request,
 		_res: Response,

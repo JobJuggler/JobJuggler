@@ -1,7 +1,17 @@
-import pg from 'pg';
-import dotenv from 'dotenv';
+/**
+ * ************************************
+ *
+ * @module  query
+ * @authors  Preston Coldwell, Ryan Smithey, Geoff Sun, Micah Nelson, Elias Toussaint
+ * @description  queries the database with passed in arguments
+ * @param text (string)
+ * @param params (array)
+ * @param callback
+ * 
+ * ************************************
+ */
 
-dotenv.config();
+import pg from 'pg';
 
 const { Pool } = pg;
 

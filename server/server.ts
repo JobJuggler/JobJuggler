@@ -2,9 +2,12 @@ import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import appsRouter from './routes/appsRouter';
 
-dotenv.config();
 const app = express();
 const port = process.env.VITE_PORT;
+
+dotenv.config();
+
+app.use(express.json());
 
 // ROUTING
 app.use('/api/apps', appsRouter);

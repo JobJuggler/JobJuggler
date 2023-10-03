@@ -1,11 +1,21 @@
+/**
+ * ************************************
+ *
+ * @module  appsRouter
+ * @authors Preston Coldwell, Ryan Smithey, Geoff Sun, Micah Nelson, Elias Toussaint
+ * @description router for applications
+ * 
+ * ************************************
+ */
+
 import express, { Router, Request, Response } from 'express';
 
 import appsController from '../controllers/appsController.ts';
 
-const router: Router = express.Router();
+const appsRouter: Router = express.Router();
 
 // GET ALL APPLICATIONS FROM DATABASE
-router.get(
+appsRouter.get(
   '/',
   appsController.getApplications,
   (_req: Request, res: Response) => {
@@ -15,18 +25,23 @@ router.get(
 );
 
 // CREATE NEW APPLICATION IN DATABASE
-router.post('/', () => {
-  console.log('post request hit');
-});
+appsRouter.post(
+  '/', 
+  appsController.createApplication,
+  (_req: Request, res: Response) => {
+    console.log('post request hit');
+    res.status(200).send(res.locals.newApplication);
+  },
+);
 
 // DELETE APPLICATION FROM DATABASE
-router.delete('/', () => {
+appsRouter.delete('/', () => {
   console.log('delete request hit');
 });
 
 // UPDATE APPLICATION IN DATABASE
-router.put('/', () => {
+appsRouter.put('/', () => {
   console.log('update request hit');
 });
 
-export default router;
+export default appsRouter;
