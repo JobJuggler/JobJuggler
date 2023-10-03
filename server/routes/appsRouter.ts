@@ -4,7 +4,7 @@
  * @module  appsRouter
  * @authors Preston Coldwell, Ryan Smithey, Geoff Sun, Micah Nelson, Elias Toussaint
  * @description router for applications
- * 
+ *
  * ************************************
  */
 
@@ -19,29 +19,37 @@ appsRouter.get(
   '/',
   appsController.getApplications,
   (_req: Request, res: Response) => {
-    console.log('get request hit');
     res.status(200).send(res.locals.applications);
   },
 );
 
 // CREATE NEW APPLICATION IN DATABASE
 appsRouter.post(
-  '/', 
+  '/',
   appsController.createApplication,
   (_req: Request, res: Response) => {
-    console.log('post request hit');
     res.status(200).send(res.locals.newApplication);
   },
 );
 
 // DELETE APPLICATION FROM DATABASE
-appsRouter.delete('/', () => {
-  console.log('delete request hit');
-});
+appsRouter.delete(
+  '/',
+  appsController.deleteApplication,
+  (_req: Request, res: Response) => {
+    console.log('delete request hit');
+    res.status(200).send('Deleted Application');
+  },
+);
 
 // UPDATE APPLICATION IN DATABASE
-appsRouter.put('/', () => {
-  console.log('update request hit');
-});
+appsRouter.put(
+  '/',
+  appsController.updateApplication,
+  (_req: Request, res: Response) => {
+    console.log('update request hit');
+    res.status(200).send(res.locals.updatedApplication);
+  },
+);
 
 export default appsRouter;
