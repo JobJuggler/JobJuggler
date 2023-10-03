@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { loadJobs } from '../../state/reducers/jobSlice';
-import type { Job } from  '../../../global/types';
+import type { Job } from '../../../global/types';
 import { useAppDispatch, useAppSelector } from '../../state/hooks/hooks';
 import Card from './Card';
 
@@ -24,13 +24,17 @@ const Dashboard: React.FC<params> = () => {
   let newCard = <></>;
 
   if (jobList[0]) {
-    newCard = <Card job={jobList[1]}></Card>;
+    newCard = <Card job={jobList[1]} key={jobList[1].__id}></Card>;
   }
+  const cards = jobList.map<React.JSX.Element>((job, id) => {
+    return <Card job={job} key={id}></Card>
+  });
 
   return (
-    <div>
-      <h1>Title Page</h1>
-      {newCard}
+    <div className='flex flex-col h-full'>
+      <div className='flex flex-col grow'>
+        {cards}
+      </div>
     </div>
   );
 };
