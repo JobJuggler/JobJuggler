@@ -14,7 +14,6 @@ const TextInput: React.FC<props> = ({setText, label, type})=>{
       <label htmlFor="username" className="mb-1">{label}</label>
       <input
         type={type || 'text'}
-        id="username"
         onChange={(e) => setText(e.target.value)}
         className="px-2 py-1 border rounded bg-dominantLight"
       />
