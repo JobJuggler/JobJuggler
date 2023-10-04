@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppSelector } from '../../state/hooks/hooks';
 import Field from './Field';
 import { useNavigate } from 'react-router-dom';
@@ -9,10 +9,12 @@ type props = {
 }
 
 const Inspect: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
-  if (!shouldDisplayNavBar){
-    setShouldDisplayNavBar(true);
-  }
-
+  useEffect(()=>{
+    if (!shouldDisplayNavBar){
+      setShouldDisplayNavBar(true);
+    }
+  }, []);
+  
   const navigate = useNavigate();
   const jobList = useAppSelector((state) => state.jobs);
   const currentJob = useAppSelector((state) => state.currentJobID);
@@ -26,7 +28,7 @@ const Inspect: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar})
   const fields: Array<React.JSX.Element> = [];
   for (const field in job) {
     if (job[field] !== null) {
-      fields.push(<Field name={field} contents={job[field]} />);
+      fields.push(<Field key={field} name={field} contents={job[field]} />);
     }
   }
 

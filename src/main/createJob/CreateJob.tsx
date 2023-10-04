@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputField from './InputField';
@@ -9,9 +9,12 @@ type props = {
 }
 
 const CreateJob: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
-  if (!shouldDisplayNavBar){
-    setShouldDisplayNavBar(true);
-  }
+  useEffect(()=>{
+    if (!shouldDisplayNavBar){
+      setShouldDisplayNavBar(true);
+    }
+  }, []);
+  
 
   const navigate = useNavigate();
   

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,9 +14,11 @@ type props = {
 }
 
 const Login: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
-  if (shouldDisplayNavBar){
-    setShouldDisplayNavBar(false);
-  }
+  useEffect(()=>{
+    if (shouldDisplayNavBar){
+      setShouldDisplayNavBar(false);
+    }
+  }, []);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

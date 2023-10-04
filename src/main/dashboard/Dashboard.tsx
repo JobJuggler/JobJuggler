@@ -17,10 +17,12 @@ const loadJobsReact = async (dispatch: any) => {
 };
 
 const Dashboard: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
-  if (!shouldDisplayNavBar){
-    setShouldDisplayNavBar(true);
-  }
-
+  useEffect(()=>{
+    if (!shouldDisplayNavBar){
+      setShouldDisplayNavBar(true);
+    }
+  }, []);
+  
   const dispatch = useAppDispatch();
 
   useEffect(() => {
