@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import DropDownItem from './DropDownItem';
 
 const DropDown: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
@@ -14,7 +15,7 @@ const DropDown: React.FC = () => {
   const navigateDashboard = () => {
     setCurrentPage('Dashboard');
     setDropdownOpen(!dropdownOpen);
-    navigate('/');
+    navigate('/dashboard');
   };
 
   const navigateCreateJob = () => {
@@ -52,35 +53,16 @@ const DropDown: React.FC = () => {
         id='dropdown'
         className={` absolute ${
           dropdownOpen ? 'block' : 'hidden'
-        } z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 `}
+        } z-10 bg-dominantLight divide-y divide-gray-100 rounded-lg shadow w-44 `}
       >
         <ul
           className='py-2 text-sm text-gray-700 '
           aria-labelledby='dropdownDefaultButton'
         >
-          <li>
-            <a
-              href='#'
-              className='block px-4 py-2 hover:bg-gray-100'
-              onClick={navigateDashboard}
-            >
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a
-              href='#'
-              className='block px-4 py-2 hover:bg-gray-100'
-              onClick={navigateCreateJob}
-            >
-              Add Job
-            </a>
-          </li>
-          <li>
-            <a href='#' className='block px-4 py-2 hover:bg-gray-100'>
-              Sign out
-            </a>
-          </li>
+          <DropDownItem label='Dashboard' cb={navigateDashboard}/>
+          <DropDownItem label='Add Job' cb={navigateCreateJob}/>
+          <DropDownItem label='Sign out' cb={()=>navigate('/')}/>
+          
         </ul>
       </div>
     </div>

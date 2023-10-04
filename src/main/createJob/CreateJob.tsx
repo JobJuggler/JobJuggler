@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputField from './InputField';
 
-const CreateJob: React.FC = () => {
+type props = {
+  setShouldDisplayNavBar: (bool: boolean)=>void;
+  shouldDisplayNavBar: boolean;
+}
+
+const CreateJob: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
+  useEffect(()=>{
+    if (!shouldDisplayNavBar){
+      setShouldDisplayNavBar(true);
+    }
+  }, []);
+  
+
   const navigate = useNavigate();
   
   // input field states
@@ -48,7 +60,7 @@ const CreateJob: React.FC = () => {
         salary,
         notes,
       });
-      // not sure how to get rid of this at the moment with types...
+      
       if (response.status === 200) {
         toDashboard();
       } else {
@@ -62,35 +74,35 @@ const CreateJob: React.FC = () => {
 
   return (
     <div className='flex flex-col p-4'>
-      <h1 className='text-2xl'>Create a new application!</h1>
+        <h1 className='text-2xl text-center'>Create a new application!</h1>
 
-      <InputField placeholder='Company Name' setVariable={setCompany}/>
-      <InputField placeholder='Company URL' setVariable={setCompanyURL}/>
-      <InputField placeholder='Company Contact' setVariable={setCompanyContact}/>
-      <InputField placeholder='Job Title' setVariable={setJobTitle}/>
-      <InputField placeholder='Location' setVariable={setJobLocation}/>
-      <InputField placeholder='Job Description' setVariable={setJobDescription}/>
-      <InputField placeholder='Job Status' setVariable={setJobStatus}/>
-      <InputField placeholder='Interview Questions' setVariable={setInterviewQuestions}/>
-      <InputField placeholder='Application Status' setVariable={setApplicationStatus}/>
-      <InputField placeholder='Job Listing URL' setVariable={setJobURL}/>
-      <InputField placeholder='Full-Time / Part-Time' setVariable={setSchedule}/>
-      <InputField placeholder='On-Site / Remote' setVariable={setRemote}/>
-      <InputField placeholder='Date Applied (MM-DD-YYYY)' setVariable={setDateApplied}/>
-      <InputField placeholder='Interview Date (MM-DD-YYYY)' setVariable={setInterviewDate}/>
-      <InputField placeholder='Salary' setVariable={setSalary}/>
-      <InputField placeholder='Notes' setVariable={setNotes}/>
-      
+        <InputField placeholder='Company Name' setVariable={setCompany}/>
+        <InputField placeholder='Company URL' setVariable={setCompanyURL}/>
+        <InputField placeholder='Company Contact' setVariable={setCompanyContact}/>
+        <InputField placeholder='Job Title' setVariable={setJobTitle}/>
+        <InputField placeholder='Location' setVariable={setJobLocation}/>
+        <InputField placeholder='Job Description' setVariable={setJobDescription}/>
+        <InputField placeholder='Job Status' setVariable={setJobStatus}/>
+        <InputField placeholder='Interview Questions' setVariable={setInterviewQuestions}/>
+        <InputField placeholder='Application Status' setVariable={setApplicationStatus}/>
+        <InputField placeholder='Job Listing URL' setVariable={setJobURL}/>
+        <InputField placeholder='Full-Time / Part-Time' setVariable={setSchedule}/>
+        <InputField placeholder='On-Site / Remote' setVariable={setRemote}/>
+        <InputField placeholder='Date Applied (MM-DD-YYYY)' setVariable={setDateApplied}/>
+        <InputField placeholder='Interview Date (MM-DD-YYYY)' setVariable={setInterviewDate}/>
+        <InputField placeholder='Salary' setVariable={setSalary}/>
+        <InputField placeholder='Notes' setVariable={setNotes}/>
+        
 
-      <button
-        onClick={() => {
-          onCreateClicked();
-        }}
-        className='p-1 m-0.5 border border-black bg-secondary rounded-md'
-      >
-        Create Application
-      </button>
-    </div>
+        <button
+          onClick={() => {
+            onCreateClicked();
+          }}
+          className='p-1 m-0.5 border border-black bg-secondary rounded-md'
+        >
+          Create Application
+        </button>
+      </div>
   );
 };
 
