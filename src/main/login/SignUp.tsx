@@ -23,10 +23,9 @@ const SignUp: React.FC = () => {
         username,
         password,
       });
-      // Assuming the server responds with authentication details
-      console.log('Authenticated successfully:', response.data);
-      // Redirect to dashboard or any other page after successful sign-in
-      // navigate('/dashboard');
+
+      // console.log('Authenticated successfully:', response.data);
+
       if (response.status === 200) {
         navigate('/dashboard');
       }
