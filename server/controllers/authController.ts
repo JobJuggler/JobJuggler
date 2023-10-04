@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { pool } from "../models/appsModel";
+import { pool } from '../models/appsModel';
 import bcrypt from 'bcrypt';
 
 interface SignUpUser {
@@ -15,16 +15,22 @@ interface SignInUser {
 }
 
 interface AuthController {
-  createUser: (req: Request, res: Response, next: NextFunction) => Promise<void>;
-	verifyUser: (req: Request, res: Response, next: NextFunction) => Promise<void>;
-	createCookie: (req: Request, res: Response, next: NextFunction) => Promise<void>;
+  createUser: (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => Promise<void>;
+  verifyUser: (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => Promise<void>;
+  createCookie: (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => Promise<void>;
 }
-
-// const databaseVerify= async (username: string, hashedPassword: string): Promise<boolean> => {
-// 	console.log('username: ', username);
-// 	console.log('hashedPassword: ', hashedPassword);
-  
-// };
 
 const authController: AuthController = {
   async createUser(req: Request, res: Response, next: NextFunction) {
@@ -43,107 +49,89 @@ const authController: AuthController = {
     }
 
     const salt = await bcrypt.genSalt(10);
-		const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    // try {
-    //  const userData = await databaseVerify ( username, hashedPassword );
-      // if (userData) {
-      //   res.locals.successful = {
-      //     created: false,
-      //     message: 'username already exists',
-      //   };
-      //   return next();
-      // }
-			// return next()
-    // } catch (err) { console.log(err) }
-
-		
-		
-		const queryString = `
+    const queryString = `
 			INSERT INTO users (name, email, username, password)
 			VALUES ($1, $2, $3, $4)
 			RETURNING id, name, email, username;`;
-		
-		const values = [name, email, username, hashedPassword];
-		
-		try {
-			const { rows } = await pool.query(queryString, values);
-		
-			if (rows.length > 0) {
-				const user = rows[0];
-				res.locals.successful = {
-					created: true,
-					message: 'User created',
-					user,
-				};
-				return next();
-			} else {
-				throw new Error('Failed to create user.');
-			}
-		} catch (err) {
-			return next({ log: `Error in createUser: ${err}` });
-		}
-	},
 
-	// USER LOGIN FUNCTION //
-	
-	async verifyUser (req: Request, res: Response, next: NextFunction): Promise<void> {
-		console.log('entered the verifyUser middleware');
-		try {
-			const { username, password } = req.body as SignInUser;
-			// retriving hashed password
-			// const salt = await bcrypt.genSalt(10);
-		  // const hashedPassword = await bcrypt.hash(password, salt);
+    const values = [name, email, username, hashedPassword];
 
-			const queryString = `SELECT id, password FROM users WHERE username = $1`;
-			const queryValues = [username];
-			const response = await pool.query(queryString, queryValues);
-			console.log('response: ', response)
-			res.locals.userID = response.rows[0].id;
-			const storedHashedPassword = response.rows[0].password;
-			
-			bcrypt.compare(password, storedHashedPassword, (err, result) => {
-				if (result) {
-					console.log('Passwords match! User can log in.');
-					return next();
-				} else {
-					console.log(err);
-					return next({ 
-						log: 'bcrypt compare error' ,
-						status: 400,
-						message: { err: 'an error has occured while comparing passwords.'}
-					});
-				}
-			})	
-		} catch (err) {
-			console.log(err);
-		}
-	},
+    try {
+      const { rows } = await pool.query(queryString, values);
 
-	// USER LOGIN FUNCTION //
+      if (rows.length > 0) {
+        const user = rows[0];
+        res.locals.successful = {
+          created: true,
+          message: 'User created',
+          user,
+        };
+        return next();
+      } else {
+        throw new Error('Failed to create user.');
+      }
+    } catch (err) {
+      return next({ log: `Error in createUser: ${err}` });
+    }
+  },
 
-	async createCookie (_req: Request, res: Response, next: NextFunction): Promise<void> {
-		console.log('entering the createCookie middleware');
-		
-		try {
-			// const { userID } = res.locals;
-			const userID = res.locals.userID;
+  // USER LOGIN FUNCTION //
 
-			console.log('userID in createCookie: ', userID);
+  async verifyUser(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
+    try {
+      const { username, password } = req.body as SignInUser;
+      // retriving hashed password
+      // const salt = await bcrypt.genSalt(10);
+      // const hashedPassword = await bcrypt.hash(password, salt);
 
-			// eventually need to check if cookie exists first...
+      const queryString = `SELECT id, password FROM users WHERE username = $1`;
+      const queryValues = [username];
+      const response = await pool.query(queryString, queryValues);
 
-			res.cookie('user_id', userID, { httpOnly: true, maxAge: 3000000 })
-	
-			return next();
-		} catch (err) {
-			console.log(err);
-			return next({ log: 'bcrypt compare error' });
-		}
-	} 
+      res.locals.userID = response.rows[0].id;
+      const storedHashedPassword = response.rows[0].password;
+
+      bcrypt.compare(password, storedHashedPassword, (err, result) => {
+        if (result) {
+          return next();
+        } else {
+          console.log(err);
+          return next({
+            log: 'bcrypt compare error',
+            status: 400,
+            message: { err: 'an error has occured while comparing passwords.' },
+          });
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  // USER LOGIN FUNCTION //
+
+  async createCookie(
+    _req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
+    try {
+      const userID = res.locals.userID;
+
+      res.cookie('user_id', userID, { httpOnly: true, maxAge: 3000000 });
+
+      return next();
+    } catch (err) {
+      console.log(err);
+      return next({ log: 'bcrypt compare error' });
+    }
+  },
 };
-
-
-
 
 export default authController;
