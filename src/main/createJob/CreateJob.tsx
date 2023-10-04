@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputField from './InputField';
-import NavBar from '../navBar/NavBar';
 
 const CreateJob: React.FC = () => {
   const navigate = useNavigate();

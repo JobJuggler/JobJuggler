@@ -3,26 +3,19 @@ import './index.css';
 import Dashboard from './main/dashboard/Dashboard';
 import CreateJob from './main/createJob/CreateJob';
 import Login from './main/login/Login';
+import SignUp from './main/login/SignUp';
 import NavBar from './main/navBar/NavBar.tsx';
-import Inspect from './main/inspectJob/InspectJob.tsx';
-
-const TestJob = {
-  __id: 1234,
-  company: 'asdf', 
-  jobtitle: 'asdf', 
-  joblocation: 'here',
-  jobstatus: 'Done', 
-  applicationstatus: 'DOne'
-}
 
 function App() {
-  const renderNavBar = true;
+
+  const shouldDisplayNavBar = location.pathname !== '/' && location.pathname !== '/signup';
 
   return (
     <BrowserRouter>
-      {renderNavBar && <NavBar />}
+      {shouldDisplayNavBar && <NavBar />}
       <Routes>
         <Route path='/' element={<Login />} />
+        <Route path='/signup' element={<SignUp />} />
         <Route path='/createjob' element={<CreateJob />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/inspectjob' element={<Inspect job={TestJob}/>} />

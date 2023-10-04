@@ -3,7 +3,6 @@ import { loadJobs } from '../../state/reducers/jobSlice';
 import type { Job } from '../../../global/types';
 import { useAppDispatch, useAppSelector } from '../../state/hooks/hooks';
 import Card from './Card';
-import NavBar from '../navBar/NavBar';
 
 type params = {};
 
