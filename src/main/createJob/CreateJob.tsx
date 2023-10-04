@@ -37,7 +37,7 @@ const CreateJob: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar
   const [notes, setNotes] = useState('');
 
   const toDashboard = () => {
-    navigate('/');
+    navigate('/dashboard');
   };
 
   const onCreateClicked = async () => {
