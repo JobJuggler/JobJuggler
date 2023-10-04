@@ -26,6 +26,7 @@ const Login: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) =
 
   const handleSignIn = async () => {
     try {
+      console.log('handle signin clicked')
       const response = await axios.post<authInfo>('/api/auth/login', {
         username,
         password,

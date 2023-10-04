@@ -2,12 +2,14 @@ import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import appsRouter from './routes/appsRouter';
 import authRouter from './routes/authRouter';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.VITE_PORT;
 
+app.use(cookieParser());
 app.use(express.json());
 
 // ROUTING

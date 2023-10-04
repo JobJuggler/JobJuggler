@@ -15,10 +15,19 @@ import authController from '../controllers/authController';
 const authRouter: Router = express.Router();
 
 authRouter.post(
-  '/login',
+  '/signup',
   authController.createUser,
   (_req: Request, res: Response) => {
     return res.status(200).send(res.locals.successful);
+  },
+);
+
+authRouter.post(
+  '/login',
+  authController.verifyUser,
+  authController.createCookie,
+  (_req: Request, res: Response) => {
+    return res.status(200).send(res.locals.id);
   },
 );
 
