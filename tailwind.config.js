@@ -4,9 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        dominant: '#0f172a', //Background type
-        secondary: '#475569',//Button background, highlights
-        accent: '#e2e8f0',   //Text button outlines
+        dominantDark: '#050c1e',
+        dominant: '#0f172a',
+        dominantLight: '#1a2337', 
+
+        secondaryDark: '#3a475b',
+        secondary: '#475569',
+        secondaryLight: '#556377',
+        
+        accentDark: '#d2d8e0',
+        accent: '#e2e8f0',
+        accentLight: '#f4f8ff',
+
         primaryText: '#3d3d3d', // dark slate
         secondaryText: '#6d6d6d', // slate
         tertiaryText: '#ffffff', // white
