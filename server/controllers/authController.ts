@@ -47,7 +47,7 @@ const authController: AuthController = {
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const queryString = 'INSERT INTO users (username, password) VALUES ($1, $2)';
+    const queryString = 'INSERT INTO users (username, password) VALUES ($1, $2)'; // NEED TO WRITE OUT ENTIRE QUERY TO CREATE A USER (THERE WILL BE MORE FIELDS FOR INFO IN SIGNUP PAGE)
     const values = [username, hashedPassword];
 
     try {
