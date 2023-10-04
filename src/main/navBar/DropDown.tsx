@@ -15,7 +15,7 @@ const DropDown: React.FC = () => {
   const navigateDashboard = () => {
     setCurrentPage('Dashboard');
     setDropdownOpen(!dropdownOpen);
-    navigate('/');
+    navigate('/dashboard');
   };
 
   const navigateCreateJob = () => {
@@ -61,7 +61,7 @@ const DropDown: React.FC = () => {
         >
           <DropDownItem label='Dashboard' cb={navigateDashboard}/>
           <DropDownItem label='Add Job' cb={navigateCreateJob}/>
-          <DropDownItem label='Sign out' cb={()=>{}}/>
+          <DropDownItem label='Sign out' cb={()=>navigate('/')}/>
           
         </ul>
       </div>

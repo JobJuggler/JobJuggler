@@ -7,7 +7,7 @@ type FieldParams = {
 
 const Field: React.FC<FieldParams> = ({ name, contents }) => {
   return (
-    <div className='first:mt-4 last:mb-4 flex flex-col mx-4 my-2 px-2 py-1 border-2 rounded-xl'>
+    <div className='p-1 m-0.5 border border-black bg-secondary rounded-md'>
       {name + ': ' + contents}
     </div>
   );

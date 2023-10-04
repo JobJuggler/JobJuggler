@@ -33,7 +33,6 @@ const Dashboard: React.FC<params> = () => {
 
   return (
     <div className='h-full'>
-      {<NavBar />}
       <div className='bg-dominant flex flex-col h-full overflow-scroll'>
         <div className='flex flex-col grow'>{cards}</div>
       </div>
