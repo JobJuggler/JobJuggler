@@ -10,13 +10,16 @@
 
 import express, { Router, Request, Response } from 'express';
 
-// import authController from '../controllers/authController';
+import authController from '../controllers/authController';
 
 const authRouter: Router = express.Router();
 
-authRouter.post('/',  
-(_req: Request, res: Response) => {
- return res.status(200).send('test')
-});
+authRouter.post(
+  '/',
+  authController.createUser,
+  (_req: Request, res: Response) => {
+    return res.status(200).send(res.locals.successful);
+  },
+);
 
 export default authRouter;
