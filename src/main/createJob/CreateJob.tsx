@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Job } from '../../../global/types';
-import NavBar from '../navBar/NavBar';
-
-type CreateJobResponse = {
-  job: Job;
-};
 import InputField from './InputField';
 
 const CreateJob: React.FC = () => {
