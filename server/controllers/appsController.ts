@@ -14,15 +14,16 @@ const appsController = {
 	 * ************************************
 	 */
 	getApplications: async (
-		_req: Request,
+		req: Request,
 		res: Response,
 		next: NextFunction
 	): Promise<void> => {
 		
 		try {
+			const { user_id } = req.cookies;
 
-			const insertQuery = 'SELECT * FROM applications';
-			const applications = await pool.query(insertQuery);
+			const insertQuery = `SELECT * FROM applications WHERE applications.user_id = $1`;
+			const applications = await pool.query(insertQuery, [user_id]);
 
 			res.locals.applications = applications.rows;
 
@@ -54,6 +55,8 @@ const appsController = {
 
 		try {
 
+			const { user_id } = req.cookies;
+
 			const { 
 				company,
 				companyURL,
@@ -70,7 +73,7 @@ const appsController = {
 				dateApplied,
 				interviewDate,
 				salary,
-				notes
+				notes,
 			} = req.body;
 
 			const insertQuery = `
@@ -91,9 +94,10 @@ const appsController = {
 						dateApplied,
 						interviewDate,
 						salary,
-						notes
+						notes,
+						user_id
 					) 
-				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *`;
+				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *`;
 
 			const insertValues = [
 				company,
@@ -111,7 +115,8 @@ const appsController = {
 				dateApplied,
 				interviewDate,
 				salary,
-				notes
+				notes,
+				user_id
 			];
 
 			const newApplication = await pool.query(insertQuery, insertValues);

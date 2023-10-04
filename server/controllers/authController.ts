@@ -2,28 +2,33 @@ import { Request, Response, NextFunction } from 'express';
 import { pool } from "../models/appsModel";
 import bcrypt from 'bcrypt';
 
-interface User {
+interface SignUpUser {
   name: string;
   email: string;
   username: string;
   password: string;
 }
 
-interface AuthController {
-  createUser: (req: Request, res: Response, next: NextFunction) => Promise<void>;
+interface SignInUser {
+  username: string;
+  password: string;
 }
 
-// const getUserByUsername = async (name: string, email: string, username: string, password: string): Promise<User | undefined> => {
-//   const queryString = `INSERT INTO users (name, email, username, password) VALUES ($1, $2, $3, $4)`;
-//   const value = [name, email, username, password];
-//   const { rows } = await pool.query(queryString, value);
-// 	console.log('ROWS[0]: ', rows[0])
-//   return rows[0];
+interface AuthController {
+  createUser: (req: Request, res: Response, next: NextFunction) => Promise<void>;
+	verifyUser: (req: Request, res: Response, next: NextFunction) => Promise<void>;
+	createCookie: (req: Request, res: Response, next: NextFunction) => Promise<void>;
+}
+
+// const databaseVerify= async (username: string, hashedPassword: string): Promise<boolean> => {
+// 	console.log('username: ', username);
+// 	console.log('hashedPassword: ', hashedPassword);
+  
 // };
 
 const authController: AuthController = {
   async createUser(req: Request, res: Response, next: NextFunction) {
-    const { name, email, username, password } = req.body as User;
+    const { name, email, username, password } = req.body as SignUpUser;
 
     try {
       if (!username || !password) {
@@ -37,19 +42,22 @@ const authController: AuthController = {
       return next({ log: 'Error in createUser' });
     }
 
+    const salt = await bcrypt.genSalt(10);
+		const hashedPassword = await bcrypt.hash(password, salt);
+
     // try {
-    //   const userData = await getUserByUsername( name, email, username, password );
-    //   if (userData) {
-    //     res.locals.successful = {
-    //       created: false,
-    //       message: 'username already exists',
-    //     };
-    //     return next();
-    //   }
+    //  const userData = await databaseVerify ( username, hashedPassword );
+      // if (userData) {
+      //   res.locals.successful = {
+      //     created: false,
+      //     message: 'username already exists',
+      //   };
+      //   return next();
+      // }
+			// return next()
     // } catch (err) { console.log(err) }
 
-		const salt = await bcrypt.genSalt(10);
-		const hashedPassword = await bcrypt.hash(password, salt);
+		
 		
 		const queryString = `
 			INSERT INTO users (name, email, username, password)
@@ -75,7 +83,67 @@ const authController: AuthController = {
 		} catch (err) {
 			return next({ log: `Error in createUser: ${err}` });
 		}
-	}
+	},
+
+	// USER LOGIN FUNCTION //
+	
+	async verifyUser (req: Request, res: Response, next: NextFunction): Promise<void> {
+		console.log('entered the verifyUser middleware');
+		try {
+			const { username, password } = req.body as SignInUser;
+			// retriving hashed password
+			// const salt = await bcrypt.genSalt(10);
+		  // const hashedPassword = await bcrypt.hash(password, salt);
+
+			const queryString = `SELECT id, password FROM users WHERE username = $1`;
+			const queryValues = [username];
+			const response = await pool.query(queryString, queryValues);
+			console.log('response: ', response)
+			res.locals.userID = response.rows[0].id;
+			const storedHashedPassword = response.rows[0].password;
+			
+			bcrypt.compare(password, storedHashedPassword, (err, result) => {
+				if (result) {
+					console.log('Passwords match! User can log in.');
+					return next();
+				} else {
+					console.log(err);
+					return next({ 
+						log: 'bcrypt compare error' ,
+						status: 400,
+						message: { err: 'an error has occured while comparing passwords.'}
+					});
+				}
+			})	
+		} catch (err) {
+			console.log(err);
+		}
+	},
+
+	// USER LOGIN FUNCTION //
+
+	async createCookie (_req: Request, res: Response, next: NextFunction): Promise<void> {
+		console.log('entering the createCookie middleware');
+		
+		try {
+			// const { userID } = res.locals;
+			const userID = res.locals.userID;
+
+			console.log('userID in createCookie: ', userID);
+
+			// eventually need to check if cookie exists first...
+
+			res.cookie('user_id', userID, { httpOnly: true, maxAge: 3000000 })
+	
+			return next();
+		} catch (err) {
+			console.log(err);
+			return next({ log: 'bcrypt compare error' });
+		}
+	} 
 };
+
+
+
 
 export default authController;

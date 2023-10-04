@@ -16,6 +16,7 @@ const Login: React.FC = () => {
 
   const handleSignIn = async () => {
     try {
+      console.log('handle signin clicked')
       const response = await axios.post<authInfo>('/api/auth/login', {
         username,
         password,
@@ -27,7 +28,7 @@ const Login: React.FC = () => {
       // Redirect to dashboard or any other page after successful sign-in
       // navigate('/dashboard');
       if (response.status === 200) {
-      navigate('/dashboard');
+        navigate('/dashboard');
       }
   
     } catch (error) {
