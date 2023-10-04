@@ -3,7 +3,7 @@ import './index.css';
 import Dashboard from './main/dashboard/Dashboard';
 import CreateJob from './main/createJob/CreateJob';
 import Login from './main/login/Login';
-import NavBar from './main/navBar/NavBar.tsx';
+// import NavBar from './main/navBar/NavBar.tsx';
 
 function App() {
   return (
