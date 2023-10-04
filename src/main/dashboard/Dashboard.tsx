@@ -24,10 +24,10 @@ const Dashboard: React.FC<params> = () => {
   let newCard = <></>;
 
   if (jobList[0]) {
-    newCard = <Card job={jobList[1]} key={jobList[1].__id}></Card>;
+    newCard = <Card job={jobList[1]} id={0} key={jobList[1].__id}></Card>;
   }
   const cards = jobList.map<React.JSX.Element>((job, id) => {
-    return <Card job={job} key={id}></Card>;
+    return <Card job={job} id={id} key={id}></Card>;
   });
 
   return (
