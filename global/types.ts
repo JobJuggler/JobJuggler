@@ -16,4 +16,5 @@ export interface Job {
   salary?: Number;
   remote?: Boolean;
   notes?: String;
-};
+  [index: string]: String | Number | Boolean | Date | undefined;
+}
