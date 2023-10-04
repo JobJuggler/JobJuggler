@@ -18,7 +18,6 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/createjob' element={<CreateJob />} />
         <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/inspectjob' element={<Inspect job={TestJob}/>} />
       </Routes>
     </BrowserRouter>
   );
