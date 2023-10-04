@@ -3,7 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputField from './InputField';
 
-const CreateJob: React.FC = () => {
+type props = {
+  setShouldDisplayNavBar: (bool: boolean)=>void;
+  shouldDisplayNavBar: boolean;
+}
+
+const CreateJob: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
+  if (!shouldDisplayNavBar){
+    setShouldDisplayNavBar(true);
+  }
+
   const navigate = useNavigate();
   
   // input field states

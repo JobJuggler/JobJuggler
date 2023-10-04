@@ -8,8 +8,16 @@ interface authInfo {
   password: string;
 }
 
+type props = {
+  setShouldDisplayNavBar: (bool: boolean)=>void;
+  shouldDisplayNavBar: boolean;
+}
 
-const Login: React.FC = () => {
+const Login: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
+  if (shouldDisplayNavBar){
+    setShouldDisplayNavBar(false);
+  }
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();

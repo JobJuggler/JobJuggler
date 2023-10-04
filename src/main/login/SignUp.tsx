@@ -7,7 +7,16 @@ interface authInfo {
   password: string;
 }
 
-const SignUp: React.FC = () => {
+type props = {
+  setShouldDisplayNavBar: (bool: boolean)=>void;
+  shouldDisplayNavBar: boolean;
+}
+
+const SignUp: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
+  if (shouldDisplayNavBar){
+    setShouldDisplayNavBar(false);
+  }
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');

@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react';
-// import { editJobs } from '../../state/reducers/jobSlice';
-import type { Job } from '../../../global/types';
-import { useAppDispatch, useAppSelector } from '../../state/hooks/hooks';
+import React from 'react';
+import { useAppSelector } from '../../state/hooks/hooks';
 import Field from './Field';
 import { useNavigate } from 'react-router-dom';
 
-type params = {};
+type props = {
+  setShouldDisplayNavBar: (bool: boolean)=>void;
+  shouldDisplayNavBar: boolean;
+}
 
-const Inspect: React.FC<params> = () => {
+const Inspect: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
+  if (!shouldDisplayNavBar){
+    setShouldDisplayNavBar(true);
+  }
+
   const navigate = useNavigate();
   const jobList = useAppSelector((state) => state.jobs);
   const currentJob = useAppSelector((state) => state.currentJobID);
@@ -15,7 +20,7 @@ const Inspect: React.FC<params> = () => {
   const job = jobList[currentJob];
 
   const toDashboard = () => {
-    navigate('/');
+    navigate('/dashboard');
   };
 
   const fields: Array<React.JSX.Element> = [];
@@ -26,7 +31,7 @@ const Inspect: React.FC<params> = () => {
   }
 
   return (
-    <div className='flex flex-col h-full'>
+    <div className='flex flex-col h-full p-4'>
       <button
         onClick={() => {
           toDashboard();

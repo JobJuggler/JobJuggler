@@ -4,7 +4,10 @@ import type { Job } from '../../../global/types';
 import { useAppDispatch, useAppSelector } from '../../state/hooks/hooks';
 import Card from './Card';
 
-type params = {};
+type props = {
+  setShouldDisplayNavBar: (bool: boolean)=>void;
+  shouldDisplayNavBar: boolean;
+}
 
 const loadJobsReact = async (dispatch: any) => {
   const jobs: Response = await fetch('/api/apps');
@@ -13,7 +16,11 @@ const loadJobsReact = async (dispatch: any) => {
   dispatch(loadJobs(jobsJSON));
 };
 
-const Dashboard: React.FC<params> = () => {
+const Dashboard: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
+  if (!shouldDisplayNavBar){
+    setShouldDisplayNavBar(true);
+  }
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
