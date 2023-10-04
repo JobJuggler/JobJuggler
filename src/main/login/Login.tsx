@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import loginImage from '../../assets/logo.png';
+
 
 interface authInfo {
   username: string;
@@ -36,7 +36,7 @@ const Login: React.FC = () => {
   };
   return (
     <div className="relative flex justify-center items-center h-screen">
-      <img src={loginImage} alt="Login Background" className="absolute left-31 top-20 w-20 h-21 object-cover" />
+      <img src="/NavLogo.png" alt="Login Background" className="absolute left-31 top-20 w-20 h-21 object-cover" />
       <div className="relative flex flex-col items-center w-2/2 p-8 border rounded-lg bg-white bg-opacity-80 z-10">
         <h1 className="text-xl font-bold mb-4">Login</h1>
         <div className="flex flex-col mb-4">
@@ -59,7 +59,7 @@ const Login: React.FC = () => {
             className="px-2 py-1 border rounded"
           />
         </div>
-        <button onClick={handleSignIn} className="px-4 py-2 rounded w-full mb-2">Sign In</button>
+        <button onClick={() => handleSignIn()} className="px-4 py-2 rounded w-full mb-2">Sign In</button>
         <div className="flex justify-between">
           <button  className="px-4 py-2 rounded mr-2">Sign Up</button>
           <button  className="px-4 py-2 rounded">Forgot Password</button>

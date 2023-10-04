@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputField from './InputField';
+import NavBar from '../navBar/NavBar';
 
 const CreateJob: React.FC = () => {
   const navigate = useNavigate();
@@ -61,7 +62,11 @@ const CreateJob: React.FC = () => {
 
 
   return (
-    <div className='flex flex-col p-4'>
+    <div>
+      
+      {<NavBar/>}
+
+      <div className='flex flex-col p-4'>
       <h1 className='text-2xl'>Create a new application!</h1>
 
       <InputField placeholder='Company Name' setVariable={setCompany}/>
@@ -90,6 +95,7 @@ const CreateJob: React.FC = () => {
       >
         Create Application
       </button>
+    </div>
     </div>
   );
 };

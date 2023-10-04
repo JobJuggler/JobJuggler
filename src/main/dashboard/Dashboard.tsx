@@ -3,6 +3,7 @@ import { loadJobs } from '../../state/reducers/jobSlice';
 import type { Job } from '../../../global/types';
 import { useAppDispatch, useAppSelector } from '../../state/hooks/hooks';
 import Card from './Card';
+import NavBar from '../navBar/NavBar';
 
 type params = {};
 
@@ -27,17 +28,17 @@ const Dashboard: React.FC<params> = () => {
     newCard = <Card job={jobList[1]} key={jobList[1].__id}></Card>;
   }
   const cards = jobList.map<React.JSX.Element>((job, id) => {
-    return <Card job={job} key={id}></Card>
+    return <Card job={job} key={id}></Card>;
   });
 
   return (
-    <div className='bg-dominant flex flex-col h-full overflow-scroll'>
-      <div className='flex flex-col grow'>
-        {cards}
+    <div className='h-full'>
+      {<NavBar />}
+      <div className='bg-dominant flex flex-col h-full overflow-scroll'>
+        <div className='flex flex-col grow'>{cards}</div>
       </div>
     </div>
   );
 };
 
 export default Dashboard;
-
