@@ -37,7 +37,6 @@ appsRouter.delete(
   '/',
   appsController.deleteApplication,
   (_req: Request, res: Response) => {
-    console.log('delete request hit');
     res.status(200).send('Deleted Application');
   },
 );
@@ -47,7 +46,6 @@ appsRouter.put(
   '/',
   appsController.updateApplication,
   (_req: Request, res: Response) => {
-    console.log('update request hit');
     res.status(200).send(res.locals.updatedApplication);
   },
 );

@@ -36,8 +36,6 @@ const SignUp: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) 
         password,
       });
 
-      // console.log('Authenticated successfully:', response.data);
-
       if (response.status === 200) {
         navigate('/dashboard');
       }
