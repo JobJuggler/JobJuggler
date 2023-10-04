@@ -20,7 +20,7 @@ const DropDown: React.FC = () => {
   const navigateCreateJob = () => {
     setCurrentPage('Add Job');
     setDropdownOpen(!dropdownOpen);
-    navigate('createjob');
+    navigate('/createjob');
   };
 
   return (
