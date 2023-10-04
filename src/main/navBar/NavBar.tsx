@@ -7,13 +7,14 @@ const NavBar = ({}) => {
   return (
     <nav className='bg-dominant border-b border-gray-900 dark:bg-gray-900 shadow-md h-auto font-Exo mb-2 sticky top-0'>
       <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-1 px-3'>
-        <div className='flex items-center'>
-          <img
-            onClick={() => navigate('/')}
-            src='/NavLogo.png'
-            className='h-10 hover:cursor-pointer md:h-12'
-            alt='Logo'
-          />
+
+				<div className='flex items-center'>
+          <img 
+						onClick={() => navigate('/')} 
+            src="/NavLogo.png" 
+            className="h-10 hover:cursor-pointer" 
+            alt="Logo" 
+					/>
         </div>
 
         {<DropDown />}

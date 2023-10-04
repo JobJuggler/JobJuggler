@@ -32,12 +32,9 @@ const Dashboard: React.FC<params> = () => {
   });
 
   return (
-    <div>
-      {<NavBar/>}
-      <div className='flex flex-col h-full'>
-        <div className='flex flex-col grow'>
-          {cards}
-        </div>
+    <div className='bg-dominant flex flex-col h-full overflow-scroll'>
+      <div className='flex flex-col grow'>
+        {cards}
       </div>
     </div>
   );
