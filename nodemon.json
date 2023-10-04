@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "execMap": {
+    "ts": "ts-node"
+  }
+}
