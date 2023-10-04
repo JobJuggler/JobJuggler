@@ -28,8 +28,9 @@ const Inspect: React.FC<inspectParams> = ({ job }) => {
   }
 
   return (
-    <div className='flex flex-col h-full'>
-      <div className='flex flex-col grow'>{fields}</div>
+    <div className='flex flex-col p-4'>
+      <h1  className='text-2xl text-center'>Job Viewer</h1>
+      {fields}
     </div>
   );
 };
