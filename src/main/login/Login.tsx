@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,8 +8,18 @@ interface authInfo {
   password: string;
 }
 
+type props = {
+  setShouldDisplayNavBar: (bool: boolean)=>void;
+  shouldDisplayNavBar: boolean;
+}
 
-const Login: React.FC = () => {
+const Login: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
+  useEffect(()=>{
+    if (shouldDisplayNavBar){
+      setShouldDisplayNavBar(false);
+    }
+  }, []);
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();

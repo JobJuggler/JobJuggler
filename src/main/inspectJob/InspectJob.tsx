@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react';
-// import { editJobs } from '../../state/reducers/jobSlice';
-import type { Job } from '../../../global/types';
-import { useAppDispatch, useAppSelector } from '../../state/hooks/hooks';
+import { useAppSelector } from '../../state/hooks/hooks';
 import Field from './Field';
 import { useNavigate } from 'react-router-dom';
 
-type params = {};
+type props = {
+  setShouldDisplayNavBar: (bool: boolean)=>void;
+  shouldDisplayNavBar: boolean;
+}
 
-const Inspect: React.FC<params> = () => {
+const Inspect: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) => {
+  useEffect(()=>{
+    if (!shouldDisplayNavBar){
+      setShouldDisplayNavBar(true);
+    }
+  }, []);
+  
   const navigate = useNavigate();
   const jobList = useAppSelector((state) => state.jobs);
   const currentJob = useAppSelector((state) => state.currentJobID);
@@ -15,18 +22,18 @@ const Inspect: React.FC<params> = () => {
   const job = jobList[currentJob];
 
   const toDashboard = () => {
-    navigate('/');
+    navigate('/dashboard');
   };
 
   const fields: Array<React.JSX.Element> = [];
   for (const field in job) {
     if (job[field] !== null) {
-      fields.push(<Field name={field} contents={job[field]} />);
+      fields.push(<Field key={field} name={field} contents={job[field]} />);
     }
   }
 
   return (
-    <div className='flex flex-col h-full'>
+    <div className='flex flex-col h-full p-4'>
       <button
         onClick={() => {
           toDashboard();
