@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import TextInput from './TextInput';
 
 interface authInfo {
   username: string;
@@ -49,25 +49,9 @@ const Login: React.FC<props> = ({shouldDisplayNavBar, setShouldDisplayNavBar}) =
       <img src="/NavLogo.png" alt="Login Background" className="absolute left-31 top-20 w-20 h-21 object-cover" />
       <div className="bg-dominant relative flex flex-col items-center w-2/2 p-8 border rounded-lg bg-opacity-80 z-10">
         <h1 className="text-xl font-bold mb-4">Login</h1>
-        <div className="flex flex-col mb-4">
-          <label htmlFor="username" className="mb-1">Username:</label>
-          <input
-            type="text"
-            id="username"
-            onChange={(e) => setUsername(e.target.value)}
-            className="px-2 py-1 border rounded bg-dominantLight"
-          />
-        </div>
-        <div className="flex flex-col mb-4">
-          <label htmlFor="password" className="mb-1">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="px-2 py-1 border rounded bg-dominantLight"
-          />
-        </div>
+        <TextInput label='Username:' setText={setUsername} />
+        <TextInput label='Password:' setText={setPassword} type="password" />
+        
         <button onClick={() => handleSignIn()} className="px-4 py-2 rounded w-full mb-2">Sign In</button>
         <div className="flex justify-between">
           <button  className="px-4 py-2 rounded mr-2" onClick={() => {toSignUp()}}>Sign Up</button>
