@@ -152,11 +152,9 @@ const appsController = {
 		try {
 
 			const idToDelete = req.body.id;
-			console.log('idToDelete: ', idToDelete)
 			const insertQuery = `DELETE FROM applications WHERE id = $1 RETURNING *`;
 
 			const deletedApplication = await pool.query(insertQuery, [idToDelete]);
-			// console.log('Returned from deleteApplication: ', deletedApplication);
 
 			if (deletedApplication.rows.length === 0) {
 				return next({
@@ -196,7 +194,6 @@ const appsController = {
 			const idToUpdate = req.body.id;
 			const properties = req.body.properties;
 
-			console.log('idToUpdate: ', idToUpdate)
 			const insertQuery = `
 				UPDATE applications
 				SET(
@@ -239,7 +236,6 @@ const appsController = {
 			`;
 
 			const updateApplication = await pool.query(insertQuery, [idToUpdate, ...properties]);
-			// console.log('Returned from updateApplication: ', updateApplication);
 
 			if (updateApplication.rows.length === 0) {
 				return next({

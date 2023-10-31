@@ -22,20 +22,20 @@ Our mission is to provide you with a utility that makes the job search process m
 ![Trello](https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white)
 ![Supertest](https://img.shields.io/badge/-Supertest-C21325?style=for-the-badge&logo=Supertest&logoColor=white)
 ![Vitest](https://img.shields.io/badge/-Vitest-white?style=for-the-badge&logo=Vitest&logoColor=yellow)
-<!-- ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) -->
-<!-- ![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white) -->
-<!-- ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white) -->
-<!-- ![Jest](https://img.shields.io/badge/-jest-white?style=for-the-badge&logo=jest&logoColor=red) -->
 <br>
 
 ## Features
-- Feature 1
-- Feature 2
+- Create new job applications
+- Store your applications
+- View all of your applications on dashboard
+- Inspect and edit applications individually
+
 
 ## Get Started
-1. Navigate to our website at _________.
-2. Sign in using OAuth. 
-3. Next step..
+1. Navigate to our website at jobjuggler.io.
+2. Sign up.
+3. Sign in. 
+4. Start creating your job applications!
 
 ## Contributing
 We hope you find value in using our product!
@@ -45,19 +45,14 @@ If you happen to come across any bugs or identify areas where our product could 
 Upon the successful completion of your contributions, should you decide to submit a pull request (PR), our team will thoroughly review your code. We extend our gratitude to those who dedicate their time and skills to enhance the reliability and expand the capabilities of our product.
 
 ### Tasks for contribution
-- [X] Get All / Create application entry (backend)
-- [ ] Get All / Create application entry (frontend)
-- [ ] View dashboard (frontend)
 - [ ] User login with OAuth
-- [ ] User table with appropriate foreign keys
-- [ ] Individual job application inspection
 - [ ] Update a job application entry
 - [ ] Profile page
 
 ## Our Team
-| [<img src="./public/PrestonHeadshot.jpeg" width="100px" >](https://www.linkedin.com/in/prestoncoldwell/) | [<img src="./public/RyanHeadshot.jpg" width="100px" >](https://www.linkedin.com/in/ryan-smithey/) | [<img src="./public/GeoffHeadshot.png" width="100px" >](https://www.linkedin.com/in/geoffrey-sun/) | [<img src="./public/MicahHeadshot.jpeg" width="100px" >](https://www.linkedin.com/in/micah/) | [<img src="./public/EliasHeadshot.jpeg" width="100px" >](https://www.linkedin.com/in/elias/) |
+| [<img src="./public/PrestonHeadshot.jpeg" width="100px" >](https://www.linkedin.com/in/prestoncoldwell/) | [<img src="./public/RyanHeadshot.png" width="100px" >](https://www.linkedin.com/in/ryan-smithey/) | [<img src="./public/GeoffHeadshot.jpg" width="100px" >](https://www.linkedin.com/in/geoffrey-sun/) | [<img src="./public/micah.png" width="100px" >](https://www.linkedin.com/in/micahanelson/) | [<img src="./public/EliasHeadshot.jpg" width="100px" >](www.linkedin.com/in/eliastoussaint) |
 | ------------- | ------------- |------------- | ------------- | ------------- |
-| <div style="text-align: center">Preston Coldwell</div>  <div style="text-align: center">[<img src="./public/githubIcon.png" width="20px" >](https://github.com/PrestonColdwell) [<img src="./public/linkedInLogo.png" width="22px" >](https://www.linkedin.com/in/prestoncoldwell/)</div> | <div style="text-align: center">Ryan Smithey</div>  <div style="text-align: center">[<img src="./public/githubIcon.png" width="20px" >](https://github.com/RyanSmithey) [<img src="./public/linkedInLogo.png" width="22px" >](https://www.linkedin.com/in/ryan-smithey/)</div> | <div style="text-align: center">Geoffrey Sun</div>  <div style="text-align: center">[<img src="./public/githubIcon.png" width="20px" >](https://github.com/geoffsun2) [<img src="./public/linkedInLogo.png" width="22px" >](https://www.linkedin.com/in/geoffrey-sun/)</div> | <div style="text-align: center">Micah Nelson</div>  <div style="text-align: center">[<img src="./public/githubIcon.png" width="20px" >](https://github.com/micah) [<img src="./public/linkedInLogo.png" width="22px" >](https://www.linkedin.com/in/micah/)</div> | <div style="text-align: center">Elias Toussaint</div>  <div style="text-align: center">[<img src="./public/githubIcon.png" width="20px" >](https://github.com/elias) [<img src="./public/linkedInLogo.png" width="22px" >](https://www.linkedin.com/in/elias/)</div> |
+| <div style="text-align: center">Preston Coldwell</div>  <div style="text-align: center">[<img src="./public/githubIcon.png" width="20px" >](https://github.com/PrestonColdwell) [<img src="./public/linkedInLogo.png" width="22px" >](https://www.linkedin.com/in/prestoncoldwell/)</div> | <div style="text-align: center">Ryan Smithey</div>  <div style="text-align: center">[<img src="./public/githubIcon.png" width="20px" >](https://github.com/RyanSmithey) [<img src="./public/linkedInLogo.png" width="22px" >](https://www.linkedin.com/in/ryan-smithey/)</div> | <div style="text-align: center">Geoffrey Sun</div>  <div style="text-align: center">[<img src="./public/githubIcon.png" width="20px" >](https://github.com/geoffsun2) [<img src="./public/linkedInLogo.png" width="22px" >](https://www.linkedin.com/in/geoffrey-sun/)</div> | <div style="text-align: center">Micah Nelson</div>  <div style="text-align: center">[<img src="./public/githubIcon.png" width="20px" >](https://github.com/Mnelson98) [<img src="./public/linkedInLogo.png" width="22px" >](https://www.linkedin.com/in/micahanelson/)</div> | <div style="text-align: center">Elias Toussaint</div>  <div style="text-align: center">[<img src="./public/githubIcon.png" width="20px" >](https://github.com/ElToussaint) [<img src="./public/linkedInLogo.png" width="22px" >](www.linkedin.com/in/eliastoussaint)</div> |
 
 ## Support Us
 If our product has helped you, or you would like to show your support, please ⭐️ this repository! It helps more than you know!
